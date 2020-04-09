@@ -21,7 +21,7 @@ const News = () => {
     const [selectedDate, setSelectedDate] = React.useState(new Date());
 
     let day = selectedDate.getDate();
-    let month = selectedDate.getMonth();
+    let month = selectedDate.getMonth() + 1;
     let fullYear = selectedDate.getFullYear();
 
     let alias = `news-${fullYear}-${addZeroNumber(month)}-${addZeroNumber(day)}`;
@@ -40,7 +40,7 @@ const News = () => {
         setSelectedDate(date);
 
         day = date.getDate();
-        month = date.getMonth();
+        month = date.getMonth() + 1;
         fullYear = date.getFullYear();
 
         alias = `news-${fullYear}-${addZeroNumber(month)}-${addZeroNumber(day)}`;
