@@ -16,6 +16,14 @@ class Text extends React.Component {
         copied: false
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.value !== this.props.text) {
+            this.setState({
+                value: this.props.text
+            });
+        }
+    }
+
     render() {
         return (
             <Grid container item>
