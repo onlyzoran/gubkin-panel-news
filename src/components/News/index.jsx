@@ -65,6 +65,7 @@ const News = () => {
                 <Grid container item>
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <KeyboardDatePicker
+                            autoOk
                             disableToolbar
                             variant="inline"
                             format="dd/MM/yyyy"
