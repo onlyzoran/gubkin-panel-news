@@ -1,6 +1,4 @@
-import React, {useRef} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import InputBase from '@material-ui/core/InputBase';
+import React from 'react';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
@@ -10,57 +8,42 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Grid from '@material-ui/core/Grid';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import style from './style.module.css';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        padding: '2px 4px',
-        display: 'flex',
-        alignItems: 'center',
-        width: 400,
-    },
-    input: {
-        marginLeft: theme.spacing(1),
-        flex: 1,
-    },
-    iconButton: {
-        padding: 10,
-    },
-    divider: {
-        height: 28,
-        margin: 4,
-    },
-    textField: {
-        width: '100%',
-    },
-}));
+class Text extends React.Component {
+    state = {
+        value: this.props.text,
+        copied: false
+    }
 
-const Text = (props) => {
-    const classes = useStyles();
-
-    const textAreaRef = useRef(null);
-
-    return (
-        <Grid container item>
-            <FormControl variant="outlined" className={classes.textField}>
-                <InputLabel htmlFor="outlined-adornment-text">{props.label}</InputLabel>
-                <OutlinedInput
-                    id="outlined-adornment-text"
-                    type="text"
-                    ref={textAreaRef}
-                    value={props.text}
-                    // endAdornment={
-                    //     <InputAdornment position="end">
-                    //         <Divider className={classes.divider} orientation="vertical"/>
-                    //             <IconButton className={classes.iconButton} aria-label="directions">
-                    //                 <FileCopyIcon/>
-                    //             </IconButton>
-                    //     </InputAdornment>
-                    // }
-                    labelWidth={props.label.length * 8 + 15}
-                />
-            </FormControl>
-        </Grid>
-    );
+    render() {
+        return (
+            <Grid container item>
+                <FormControl variant="outlined" className={style.textField}>
+                    <InputLabel htmlFor="outlined-adornment-text">{this.props.label}</InputLabel>
+                    <OutlinedInput
+                        id="outlined-adornment-text"
+                        type="text"
+                        value={this.state.value}
+                        onChange={({target: {value}}) => this.setState({value, copied: false})}
+                        className={style.outlinedInput}
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <Divider className={style.divider} orientation="vertical"/>
+                                <CopyToClipboard text={this.state.value}
+                                                 onCopy={() => this.setState({copied: true})}>
+                                    <IconButton className={style.iconButton} aria-label="directions">
+                                        <FileCopyIcon/>
+                                    </IconButton>
+                                </CopyToClipboard>
+                            </InputAdornment>
+                        }
+                        labelWidth={this.props.label.length * 8 + 15}
+                    />
+                </FormControl>
+            </Grid>
+        );
+    }
 }
 
 export default Text;

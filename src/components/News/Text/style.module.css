@@ -1,0 +1,27 @@
+.root {
+    padding: 2px 4px;
+    display: flex;
+    align-items: center;
+    width: 400xp;
+}
+
+.input {
+    flex: 1;
+}
+
+.iconButton {
+    padding: 10px;
+}
+
+.outlinedInput {
+    padding-right: 5px !important;
+}
+
+.divider {
+    height: 28px !important;
+    margin: 4px !important;
+}
+
+.textField {
+    width: 100%;
+}
